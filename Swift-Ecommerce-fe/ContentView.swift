@@ -1,0 +1,21 @@
+//
+//  ContentView.swift
+//  Swift-Ecommerce-fe
+//
+//  Created by trustshop on 14/01/2026.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        NavigationStack {
+            WelcomeView()
+        }
+    }
+}
+
+
+//#Preview {
+//    ContentView()
+//}
