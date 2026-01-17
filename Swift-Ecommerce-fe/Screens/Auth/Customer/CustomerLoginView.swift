@@ -168,18 +168,6 @@ struct CustomerLoginView: View {
             )
             
             .alert(
-                "Login successful",
-                isPresented: $authVM.showSuccessAlert
-            ) {
-                Button("Continue") {
-                    authVM.isLoggedIn = true
-                }
-            } message: {
-                Text("Welcome back! You have logged in successfully.")
-            }
-
-            
-            .alert(
                 "Login failed",
                 isPresented: $authVM.showErrorAlert
             ) {
@@ -205,7 +193,7 @@ struct CustomerLoginView: View {
         .navigationBarBackButtonHidden(true)
         
         .navigationDestination(isPresented: $authVM.isLoggedIn) {
-                        HomeTabView()
+                        HomeTabView(authVM: authVM)
                     }
     }
 }

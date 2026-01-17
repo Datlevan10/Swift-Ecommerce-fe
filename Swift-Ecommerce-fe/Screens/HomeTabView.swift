@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct HomeTabView: View {
+    @ObservedObject var authVM: AuthViewModel
+    
     var body: some View {
         TabView {
 
-            HomeView()
+            HomeView(authVM: authVM)
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")

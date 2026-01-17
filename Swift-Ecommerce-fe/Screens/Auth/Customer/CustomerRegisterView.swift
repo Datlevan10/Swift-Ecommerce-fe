@@ -138,7 +138,7 @@ struct CustomerRegisterView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $authVM.isLoggedIn) {
-            HomeTabView()
+            HomeTabView(authVM: authVM)
         }
 
     }
