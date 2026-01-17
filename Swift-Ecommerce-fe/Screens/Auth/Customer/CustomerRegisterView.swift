@@ -20,6 +20,7 @@ struct CustomerRegisterView: View {
     @State private var emailError: String?
     @State private var passwordError: String?
     @State private var confirmPasswordError: String?
+    @StateObject private var authVM = AuthViewModel()
 
     var body: some View {
         ScrollView {
@@ -105,7 +106,14 @@ struct CustomerRegisterView: View {
 
                 // MARK: - Register Button
                 Button {
-                    print("Customer register success")
+                    Task {
+                            await authVM.register(
+                                fullName: fullName,
+                                email: email,
+                                phone: phone,
+                                password: password
+                            )
+                        }
                 } label: {
                     Text("Create Account")
                         .fontWeight(.bold)
@@ -129,6 +137,10 @@ struct CustomerRegisterView: View {
             .padding()
         }
         .navigationBarBackButtonHidden(true)
+        .navigationDestination(isPresented: $authVM.isLoggedIn) {
+            HomeTabView()
+        }
+
     }
 
     // MARK: - Submit condition

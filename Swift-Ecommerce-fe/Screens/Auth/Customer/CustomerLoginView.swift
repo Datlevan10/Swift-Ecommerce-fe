@@ -9,6 +9,7 @@ struct CustomerLoginView: View {
 
     @State private var emailError: String?
     @State private var passwordError: String?
+    @StateObject private var authVM = AuthViewModel()
 
     var body: some View {
         VStack {
@@ -145,6 +146,10 @@ struct CustomerLoginView: View {
                 if emailError == nil && passwordError == nil {
                     print("Customer login success")
                 }
+                
+                Task {
+                       await authVM.login(email: email, password: password)
+                   }
             } label: {
                 Text("Login")
                     .fontWeight(.bold)
@@ -161,6 +166,30 @@ struct CustomerLoginView: View {
             .disabled(
                 email.isEmpty || password.isEmpty || emailError != nil || passwordError != nil
             )
+            
+            .alert(
+                "Login successful",
+                isPresented: $authVM.showSuccessAlert
+            ) {
+                Button("Continue") {
+                    authVM.isLoggedIn = true
+                }
+            } message: {
+                Text("Welcome back! You have logged in successfully.")
+            }
+
+            
+            .alert(
+                "Login failed",
+                isPresented: $authVM.showErrorAlert
+            ) {
+                Button("OK", role: .cancel) {
+                    authVM.showErrorAlert = false
+                }
+            } message: {
+                Text(authVM.errorMessage ?? "Invalid email or password")
+            }
+
 
             // MARK: - Register
             HStack {
@@ -174,5 +203,9 @@ struct CustomerLoginView: View {
         }
         .padding()
         .navigationBarBackButtonHidden(true)
+        
+        .navigationDestination(isPresented: $authVM.isLoggedIn) {
+                        HomeTabView()
+                    }
     }
 }

@@ -5,4 +5,12 @@
 //  Created by trustshop on 14/01/2026.
 //
 
-import Foundation
+import SwiftUI
+
+struct HomeView: View {
+    var body: some View {
+        Text("Home Screen")
+            .font(.title)
+    }
+}
+
