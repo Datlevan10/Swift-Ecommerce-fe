@@ -40,6 +40,10 @@
 		C32051562F1BE73500E72F3F /* CustomerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32051552F1BE73500E72F3F /* CustomerAPI.swift */; };
 		C32051592F1BE7A600E72F3F /* CustomerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32051582F1BE7A600E72F3F /* CustomerProfile.swift */; };
 		C320515B2F1BE7DD00E72F3F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320515A2F1BE7DD00E72F3F /* ProfileViewModel.swift */; };
+		C34D3AD02F5714F900FAA74E /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34D3ACF2F5714F900FAA74E /* CategoryCard.swift */; };
+		C34D3AD22F57160700FAA74E /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34D3AD12F57160700FAA74E /* CategoryViewModel.swift */; };
+		C34D3AD42F5716F800FAA74E /* CategoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34D3AD32F5716F800FAA74E /* CategoryAPI.swift */; };
+		C34D3AD82F57175600FAA74E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34D3AD72F57175600FAA74E /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +82,10 @@
 		C32051552F1BE73500E72F3F /* CustomerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAPI.swift; sourceTree = "<group>"; };
 		C32051582F1BE7A600E72F3F /* CustomerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfile.swift; sourceTree = "<group>"; };
 		C320515A2F1BE7DD00E72F3F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C34D3ACF2F5714F900FAA74E /* CategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
+		C34D3AD12F57160700FAA74E /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		C34D3AD32F5716F800FAA74E /* CategoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAPI.swift; sourceTree = "<group>"; };
+		C34D3AD72F57175600FAA74E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +165,7 @@
 				C320512C2F17EA6100E72F3F /* Inputs */,
 				C320511A2F17E1BF00E72F3F /* RoleCard.swift */,
 				C32051262F17E50700E72F3F /* CheckboxToggleStyle.swift */,
+				C34D3ACF2F5714F900FAA74E /* CategoryCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -166,6 +175,7 @@
 			children = (
 				C320513C2F1BD7B600E72F3F /* AuthViewModel.swift */,
 				C320515A2F1BE7DD00E72F3F /* ProfileViewModel.swift */,
+				C34D3AD12F57160700FAA74E /* CategoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -188,6 +198,7 @@
 				C32051402F1BD7DE00E72F3F /* AuthResponse.swift */,
 				C320514E2F1BDEBD00E72F3F /* LoginRequest.swift */,
 				C32051502F1BDECE00E72F3F /* RegisterRequest.swift */,
+				C34D3AD72F57175600FAA74E /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +292,7 @@
 				C32051382F1BD79300E72F3F /* APIClient.swift */,
 				C320513A2F1BD7A400E72F3F /* AuthAPI.swift */,
 				C32051552F1BE73500E72F3F /* CustomerAPI.swift */,
+				C34D3AD32F5716F800FAA74E /* CategoryAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -399,6 +411,8 @@
 				C32051212F17E2AC00E72F3F /* CustomerLoginView.swift in Sources */,
 				C32051232F17E2B900E72F3F /* CustomerRegisterView.swift in Sources */,
 				C320514D2F1BD94700E72F3F /* HomeTabView.swift in Sources */,
+				C34D3AD02F5714F900FAA74E /* CategoryCard.swift in Sources */,
+				C34D3AD82F57175600FAA74E /* Category.swift in Sources */,
 				C32051132F17CA4F00E72F3F /* HomeView.swift in Sources */,
 				C32051562F1BE73500E72F3F /* CustomerAPI.swift in Sources */,
 				C32051272F17E50700E72F3F /* CheckboxToggleStyle.swift in Sources */,
@@ -415,9 +429,11 @@
 				C32051252F17E2D400E72F3F /* UserRole.swift in Sources */,
 				C32051162F17CB5F00E72F3F /* WelcomeView.swift in Sources */,
 				C32051512F1BDECE00E72F3F /* RegisterRequest.swift in Sources */,
+				C34D3AD42F5716F800FAA74E /* CategoryAPI.swift in Sources */,
 				C320511F2F17E29400E72F3F /* AdminLoginView.swift in Sources */,
 				C320512E2F17EA7200E72F3F /* AppTextField.swift in Sources */,
 				C320513F2F1BD7C100E72F3F /* Customer.swift in Sources */,
+				C34D3AD22F57160700FAA74E /* CategoryViewModel.swift in Sources */,
 				C320513B2F1BD7A400E72F3F /* AuthAPI.swift in Sources */,
 				C32051322F17EA8900E72F3F /* AppErrorText.swift in Sources */,
 				C32051302F17EA7F00E72F3F /* AppPasswordField.swift in Sources */,
