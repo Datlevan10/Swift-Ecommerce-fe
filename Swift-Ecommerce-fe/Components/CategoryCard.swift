@@ -27,7 +27,11 @@ struct CategoryCard: View {
                             )
                         )
                     
-                    if let url = URL(string: category.imageUrl) {
+                    let fullImageUrl = category.imageUrl.hasPrefix("http") 
+                        ? category.imageUrl 
+                        : "http://localhost:3000\(category.imageUrl)"
+                    
+                    if let url = URL(string: fullImageUrl) {
                         AsyncImage(url: url) { phase in
                             switch phase {
                             case .empty:
@@ -38,6 +42,8 @@ struct CategoryCard: View {
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
+                                    .frame(width: 140, height: 120)
+                                    .clipped()
                                     .onAppear {
                                         withAnimation(.easeIn(duration: 0.3)) {
                                             imageLoaded = true
@@ -51,8 +57,6 @@ struct CategoryCard: View {
                                 EmptyView()
                             }
                         }
-                        .frame(width: 120, height: 100)
-                        .clipped()
                         .opacity(imageLoaded ? 1 : 0)
                     } else {
                         Image(systemName: "photo.fill")
@@ -60,7 +64,7 @@ struct CategoryCard: View {
                             .foregroundColor(.gray.opacity(0.5))
                     }
                 }
-                .frame(width: 120, height: 100)
+                .frame(width: 160, height: 140)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
@@ -76,7 +80,7 @@ struct CategoryCard: View {
                 
                 VStack(spacing: 4) {
                     Text(category.categoryName)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.primary)
                         .lineLimit(2)
                         .multilineTextAlignment(.center)
@@ -84,20 +88,20 @@ struct CategoryCard: View {
                     
                     if category.parentId == nil {
                         Text("Main Category")
-                            .font(.system(size: 11))
+                            .font(.system(size: 12))
                             .foregroundColor(.secondary)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 2)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 3)
                             .background(
                                 Capsule()
                                     .fill(Color.blue.opacity(0.1))
                             )
                     }
                 }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 12)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 14)
             }
-            .frame(width: 120)
+            .frame(width: 180)
             .background(
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color(UIColor.systemBackground))

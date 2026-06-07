@@ -7,41 +7,87 @@
 
 import Foundation
 
-enum AuthAPI {
-
-    static let baseURL = "http://localhost:3000/api/auth"
-
-    // MARK: - Login
-    static func login(
-        email: String,
-        password: String
-    ) async throws -> AuthResponse {
-
-        let url = URL(string: "\(baseURL)/login")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let body = LoginRequest(email: email, password: password)
-        request.httpBody = try JSONEncoder().encode(body)
-
-        let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(AuthResponse.self, from: data)
-    }
-
+class AuthAPI {
+    static let shared = AuthAPI()
+    private let apiClient = APIClient.shared
+    
+    private init() {}
+    
     // MARK: - Register
-    static func register(
-        request: RegisterRequest
-    ) async throws -> AuthResponse {
-
-        let url = URL(string: "\(baseURL)/register")!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = try JSONEncoder().encode(request)
-
-        let (data, _) = try await URLSession.shared.data(for: urlRequest)
-        return try JSONDecoder().decode(AuthResponse.self, from: data)
+    func register(request: RegisterRequest) async throws -> AuthData {
+        return try await apiClient.request(
+            "/auth/register",
+            method: .post,
+            body: request
+        )
     }
+    
+    // MARK: - Login
+    func login(email: String, password: String) async throws -> AuthData {
+        let request = LoginRequest(email: email, password: password)
+        return try await apiClient.request(
+            "/auth/login",
+            method: .post,
+            body: request
+        )
+    }
+    
+    // MARK: - Verify Email
+    func verifyEmail(token: String) async throws -> MessageResponse {
+        return try await apiClient.request(
+            "/auth/verify-email",
+            method: .post,
+            body: VerifyEmailRequest(token: token)
+        )
+    }
+    
+    // MARK: - Forgot Password
+    func forgotPassword(email: String) async throws -> MessageResponse {
+        return try await apiClient.request(
+            "/auth/forgot-password",
+            method: .post,
+            body: ForgotPasswordRequest(email: email)
+        )
+    }
+    
+    // MARK: - Reset Password
+    func resetPassword(token: String, password: String) async throws -> MessageResponse {
+        return try await apiClient.request(
+            "/auth/reset-password",
+            method: .post,
+            body: ResetPasswordRequest(token: token, password: password)
+        )
+    }
+    
+    // MARK: - Logout
+    func logout() async throws {
+        let _: EmptyResponse = try await apiClient.request(
+            "/auth/logout",
+            method: .post
+        )
+        KeychainService.shared.clearTokens()
+    }
+    
+    // MARK: - Get Profile
+    func getProfile() async throws -> Customer {
+        return try await apiClient.request("/auth/profile")
+    }
+}
 
+// MARK: - Request Models
+struct VerifyEmailRequest: Codable {
+    let token: String
+}
+
+struct ForgotPasswordRequest: Codable {
+    let email: String
+}
+
+struct ResetPasswordRequest: Codable {
+    let token: String
+    let password: String
+}
+
+struct MessageResponse: Codable {
+    let message: String
 }
